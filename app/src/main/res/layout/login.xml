@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="502dp"
+        android:layout_height="736dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/wllppr" />
+
     <TextView
         android:id="@+id/Login"
         android:layout_width="256dp"
@@ -27,9 +39,10 @@
         android:layout_width="333dp"
         android:layout_height="50dp"
         android:layout_marginBottom="12dp"
-        android:hint="Email"
+        android:hint="Username"
         android:inputType="text"
         android:padding="16dp"
+        android:background="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/Password"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +54,8 @@
         android:layout_height="50dp"
         android:layout_marginBottom="72dp"
         android:hint="Password"
-        android:inputType="text"
+        android:background="@color/white"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/btn_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -60,9 +74,10 @@
 
     <TextView
         android:id="@+id/register"
-        android:layout_width="416dp"
-        android:layout_height="26dp"
+        android:layout_width="216dp"
+        android:layout_height="25dp"
         android:layout_marginBottom="56dp"
+        android:background="@color/white"
         android:text="Tidak punya akun? Register"
         android:textAlignment="center"
         android:textSize="16dp"

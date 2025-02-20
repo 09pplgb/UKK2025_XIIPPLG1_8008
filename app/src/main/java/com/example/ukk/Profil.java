@@ -23,9 +23,9 @@ import org.json.JSONObject;
 
     public class Profil extends AppCompatActivity {
 
-        private TextView nameTextView, imageTextView; // TextView untuk menampilkan data pengguna
+        private TextView nameTextView, imageTextView;
         private String userId;
-        private static final String API_URL = "https://yourapi.com/users/"; // Ganti dengan URL API Anda
+        private static final String API_URL = "http://172.16.0.203/ukk2/login.php";
 
         @SuppressLint({"WrongViewCast", "MissingInflatedId"})
         @Override
@@ -33,13 +33,13 @@ import org.json.JSONObject;
             super.onCreate(savedInstanceState);
             setContentView(R.layout.profil);
 
-            // Inisialisasi UI
+
             nameTextView = findViewById(R.id.Tv);
             imageTextView = findViewById(R.id.imageView);
-            // Tombol logout
+
             Button logoutButton = findViewById(R.id.btnlogout);
 
-            // Ambil id dari SharedPreferences, coba ambil dari LoginPrefs dulu, jika kosong ambil dari RegisPrefs
+
             SharedPreferences loginPrefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
             userId = loginPrefs.getString("idL", null);
 
@@ -49,34 +49,34 @@ import org.json.JSONObject;
             }
 
             if (userId != null) {
-                fetchUserData(userId); // Ambil data pengguna berdasarkan ID
+                fetchUserData(userId);
             }
 
-            // Set aksi tombol logout
+
             logoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    logout(); // Panggil metode logout
+                    logout();
                 }
             });
         }
 
         private void fetchUserData(String id) {
-            String url = API_URL + id; // Buat URL untuk request API
+            String url = API_URL + id;
 
-            // Menggunakan Volley untuk request data
+
             RequestQueue queue = Volley.newRequestQueue(this);
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
-                                // Ambil data dari response JSON
+
                                 String name = response.getString("name");
                                 String email = response.getString("email");
                                 String phone = response.getString("phone");
 
-                                // Set data ke TextView
+
                                 nameTextView.setText(name);
                                 imageTextView.setText(email);
 
@@ -92,29 +92,29 @@ import org.json.JSONObject;
                 }
             });
 
-            // Menambahkan request ke queue
+
             queue.add(request);
         }
 
-        // Metode untuk logout
+
         private void logout() {
-            // Hapus data di SharedPreferences
+
             SharedPreferences loginPrefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
             SharedPreferences regisPrefs = getSharedPreferences("RegisPrefs", MODE_PRIVATE);
 
             SharedPreferences.Editor loginEditor = loginPrefs.edit();
             SharedPreferences.Editor regisEditor = regisPrefs.edit();
 
-            loginEditor.clear(); // Hapus data di LoginPrefs
-            regisEditor.clear(); // Hapus data di RegisPrefs
+            loginEditor.clear();
+            regisEditor.clear();
 
             loginEditor.apply();
             regisEditor.apply();
 
-            // Arahkan pengguna kembali ke halaman login
-            Intent intent = new Intent(Profil.this, Login.class); // Ganti Login.class sesuai dengan activity login Anda
+
+            Intent intent = new Intent(Profil.this, Login.class);
             startActivity(intent);
-            finish(); // Menutup Profil activity agar tidak bisa kembali ke halaman profil
+            finish();
         }
     }
 
